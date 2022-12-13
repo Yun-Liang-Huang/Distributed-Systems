@@ -1,0 +1,101 @@
+#ifndef SOCKET_MESSAGE_CONST
+#define SOCKET_MESSAGE_CONST
+
+#include <iostream>
+#include <unordered_set>
+
+using namespace std;
+
+enum SOCKET_MESSAGE_TYPE {
+  QUERY_LOG,
+  QUERY_WORKER_LOG,
+  JOIN,
+  LEAVE,
+  CRASH,
+  MEMBERSHIP,
+  MEMBER_PING,
+  SUCCESSFUL,
+  FAILED,
+  MEMBER_SET_RINGMAP,
+  MEMBER_GET_ID,
+  PUT,
+  GET,
+  DELETE,
+  LS,
+  STORE,
+  GET_VERSIONS,
+  GET_FILE_METADATA,  // filesystem leader
+  COMMIT_FILE,        // filesystem leader
+  DELETE_FILE_METADATA,
+  REPLICATE,
+  GET_FILESIZE,
+  ADD_JOB,
+  REMOVE_JOB,
+  START_JOB,
+  STOP_JOB,
+  START_PHASE,
+  STOP_PHASE,
+  RUN_SUBJOB,
+  ML_JOB_STATUS,
+};
+
+enum QUERY_TYPE { STRING_SEARCH, CASE_INSENSITIVE, REGULAR_EXPRESSION };
+
+enum ML_PHASE { TRAINING, INFERENCE };
+
+const unordered_set<SOCKET_MESSAGE_TYPE> ML_API({
+    ADD_JOB,
+    REMOVE_JOB,
+    START_JOB,
+    STOP_JOB,
+    START_PHASE,
+    STOP_PHASE,
+    RUN_SUBJOB,
+    ML_JOB_STATUS,
+});
+
+const unordered_set<SOCKET_MESSAGE_TYPE> FILESYSTEM_API({
+    PUT,
+    GET,
+    DELETE,
+    LS,
+    STORE,
+    GET_VERSIONS,
+    GET_FILE_METADATA,
+    COMMIT_FILE,
+    DELETE_FILE_METADATA,
+    REPLICATE,
+    GET_FILESIZE,
+});
+
+const unordered_set<SOCKET_MESSAGE_TYPE> MEMBER_API({
+    JOIN,
+    LEAVE,
+    CRASH,
+    MEMBERSHIP,
+    MEMBER_PING,
+    MEMBER_SET_RINGMAP,
+    MEMBER_GET_ID,
+});
+
+const unordered_set<SOCKET_MESSAGE_TYPE> QUERY_API({
+    QUERY_LOG,
+    QUERY_WORKER_LOG,
+});
+
+const string SOCKET_MESSAGE_DELIMITER = "@@@@~~~~~@@@@@~~~~~@@@@";
+
+const string ACK_DELIMITER = ":";
+
+const string START_RECV_FILE = "START_RECV_FILE";
+const string START_SEND_FILE = "START_SEND_FILE";
+const string FILE_TRANSFER_MSG = "FILE_TRANSFER_MSG";
+const string GET_VERSIONS_END = "GET_VERSIONS_END";
+const string FILE_NOT_EXIST = "FILE_NOT_EXIST";
+
+const int UDP_RECEIVE_TIMEOUT_SEC = 1;
+const int UDP_RECEIVE_TIMEOUT_USEC = 0;
+
+const int SOCKET_BUFFER_SIZE = 262144;
+
+#endif
