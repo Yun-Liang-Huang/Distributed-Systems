@@ -1,0 +1,7 @@
+# do this first: 
+# sudo pip3 install --upgrade pip
+
+setuptools-rust
+transformers
+torch
+Pillow
